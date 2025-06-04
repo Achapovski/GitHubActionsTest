@@ -8,15 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
       - name: Run command on remote server
         uses: D3rHase/ssh-command-action@v0.2.2
         with:
@@ -24,9 +15,8 @@ jobs:
           user: ${{ secrets.SSH_USER }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           command: |
-                     cd ${{ secrets.PROJECT_FOLDER }};
-                     git checkout main;
-                     git pull;
-            #            docker-compose --file docker compose down;
-                     docker-compose --file docker compose up -d;
-                     docker system prune --all --force;
+            cd ${{ secrets.PROJECT_FOLDER }};
+            git checkout main;
+            git pull;
+            docker-compose --file docker compose up -d;
+            docker system prune --all --force;
