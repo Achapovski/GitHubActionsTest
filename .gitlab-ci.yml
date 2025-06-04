@@ -2,3 +2,7 @@ stages:
   - deploy
 
 deploy:
+  stage: deploy
+  script:
+    - echo "Profile Service works!"
+    - docker compose up -d --build
